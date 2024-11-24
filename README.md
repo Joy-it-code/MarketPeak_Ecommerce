@@ -223,6 +223,8 @@ To ensure a smooth workflow for developing, testing and deploying my e-commerce 
 git branch development
 git checkout development
 ```
+
+![](img/3.1developmentbranch.png)
   **.** Implement Changes: On the development branch, add your new features or bug fixes. This might include updating web pages. In my case, I just changes the slide image.
 
 ## Task 3.2: Version control with Git
@@ -276,6 +278,9 @@ git merge development
 
 ```git pull origin main```
 
+![](img/4agitpull.png)
+
+
  **.** Restart the web server (if necessary): depending on the nature of the updates. You may need to restart the web server to apply the changes.
 
  **Commands**
@@ -286,12 +291,13 @@ sudo cp -r ~/MarketPeak_Ecommerce/2129_crispy_kitchen/* /var/www/html/
 sudo systemctl reload httpd
  ```
 
- ![](img/4restartingweb.png)
+ ![](img/4sudorm-rf.png)
 
 ## **Task 5: Testing the new changes**
 
   **.** Access the website: Open a web browser and navigate the public IP address of your EC2 instance. Test the new features or fixes to ensure they work as expected in the live environment.
 
   **.** This workflow emphasizes best practices in software development and deployment, including branch management, code review through pull requests, and continous integration/deployment strategies. By following these steps, you maintain a stable and up-to-date production environment for your e-commerce platform.   
-  
+  http://13.48.178.61/
 
+![](img/5testingchanges.png)
