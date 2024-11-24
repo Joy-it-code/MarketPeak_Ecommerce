@@ -247,3 +247,17 @@ git push origin development
 
   **.** Create a Pull Request (PR): On GitHub, create a pull request to merge the development branch into the main branch. This process is crucial for code review and maintaining code quality.
 
+![](img/3.3creatingPR.png)
+![](img/3.3creatingPR2.png)
+
+  **.** Switch to the main branch: First, make sure you are on the main branch by running and merging development into main: Merge the changes from the development branch into the main branch.
+
+  **Commands:**
+
+```
+git checkout main
+git merge development
+```
+
+
+
