@@ -262,6 +262,9 @@ git merge development
 ![](img/3.3checkout.png)
 
 **.** Push the main branch to GitHub: Once the merge is complete, push the main branch to GitHub to update the remote repository with the changes.
+ **Command**
+
+ ```git push origin main```
 
 ![](img/3.3gitpush.png)
 
@@ -269,6 +272,26 @@ git merge development
 
   **.** Pull the latest changes on the server: SSH into your AWS EC2 instance where the production website is hosted. Navigate to the website's directory and pull the latest changes from the main branch.
 
-```git push origin main```
+**Command**
 
+```git pull origin main```
+
+ **.** Restart the web server (if necessary): depending on the nature of the updates. You may need to restart the web server to apply the changes.
+
+ **Commands**
+
+ ```
+sudo rm -rf /var/www/html/*
+sudo cp -r ~/MarketPeak_Ecommerce/2129_crispy_kitchen/* /var/www/html/
+sudo systemctl reload httpd
+ ```
+
+ ![](img/4restartingweb.png)
+
+## **Task 5: Testing the new changes**
+
+  **.** Access the website: Open a web browser and navigate the public IP address of your EC2 instance. Test the new features or fixes to ensure they work as expected in the live environment.
+
+  **.** This workflow emphasizes best practices in software development and deployment, including branch management, code review through pull requests, and continous integration/deployment strategies. By following these steps, you maintain a stable and up-to-date production environment for your e-commerce platform.   
+  
 
