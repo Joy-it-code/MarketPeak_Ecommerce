@@ -259,5 +259,16 @@ git checkout main
 git merge development
 ```
 
+![](img/3.3checkout.png)
+
+**.** Push the main branch to GitHub: Once the merge is complete, push the main branch to GitHub to update the remote repository with the changes.
+
+![](img/3.3gitpush.png)
+
+## **Task 4: Deploying Updates to the Production Server**
+
+  **.** Pull the latest changes on the server: SSH into your AWS EC2 instance where the production website is hosted. Navigate to the website's directory and pull the latest changes from the main branch.
+
+```git push origin main```
 
 
