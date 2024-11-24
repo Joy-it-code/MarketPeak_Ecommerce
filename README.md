@@ -88,7 +88,156 @@ git branch -M main
 git push -u origin main
 ```
 
+![](img/1.4dpushfile.png)
+
+## Step 2: AWS Deployment
+
+To deploy the MarketPeak_Ecommerce platform, you will start by setting up an Amazon EC2 instance.
+
+## Task 2.1 setup an AWS EC2 instance for deployment
+
+**.** Log in to the AWS Management Console.
+
+![](img/2.1awslogin.png)
+
+**.** Launch an EC2 instance using an amazon Linux AMI.
+
+![](img/2.1instance.png)
+
+**.** Showing an EC2 instance running
+
+![](img/2.1ainstace.png)
+
+**.** Make sure you are logged into your EC2 instance using SSH. You should see a command prompt indicating you are on your instance, typically something like:
+
+![](img/2.1cawslinked.png)
+
+## Task 2.2: Clone the reposirory on the Linux server 
+
+Before deploying your e-commerce platform, you need to clone the GitHub repositoryto your AWS EC2 instance. This process involves authenticating with GitHub and choosing between two primary methods of cloning a repository: SSH and HTTPS.
+
+  **.** Navigate to your repository in github console
+
+  **.** Select the **'code'** as highlighted in the image below
+
+![](img/2.2code.png)
+
+## SSH Method:
+
+  **.** On your EC2 instance, generate SSH keypair using ssh-keygen as shown
+
+  **Command**
+
+  ```ssh-keygen```
+
+  ![](img/2.2bsshkeygen.png)
+
+  **.** Cat and copy the public key.
+
+Command:
+
+```cat /home/ec2-user/.ssh/id_rsa.pub```
+
+![](img/2.2cat.png)
+
+  **.** Adding ssh public key to Github repository by clicking on your image icon, click on settings, then click on ssh and Gkeys.
+
+![](img/2.2dimageicon.png)
+![](img/2.2newssh.png)
+![](img/2.2sshkeyb.png)
+![](img/2.2sshkeyc.png)
+
+After adding the SSH key to your GitHub account, you should be able to use it for secure access to your GitHub repositories from your EC2 instance or any system where the private key is stored.
+
+  **.** Use the SSH clone the repository
+
+  **Command**
+
+  ```git clone git@github.com:Joy-it-code/MarketPeak_Ecommerce.git```
+
+![](img/2.2sshclone.png)
+
+![](img/2.2gitclone.png)
+
+## **HTTPS Method:**
+
+For repositories that you plan to clone without setting up SSH keys, use the HTTPS URL. GitHub will prompt for your username and password:
+
+**Note** that github.com no longer accept password, but you will have to generate tokens
+
+**Command:**
+
+git clone https://github.com/Joy-it-code/MarketPeak_Ecommerce.git
+
+## Task 2.3 install a Web Server on EC2
+
+Apache HTTP Server (httpd) is a widely used web server that serves HTML files and content over the internet. Installing it on Linux EC2 server allows you to host to host MarketPeak E-commerce site
+
+**.** Install Apache web server on the EC2 instance: Note that httpd is the software name for Apache on redhats systems using yum package manager
+
+**Commands:**
+
+```
+sudo yum update -y
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+```
+![](img/2.3installed.png)
+![](img/2.3asymlinkreplaced.png)
+
+**Configure httpd for website:**
+
+  **.** Prepare the Web Directory: Clear the default httpd web directory and copy MarketPeak Ecommerce website files to it.
+
+  Reload httpd: Apply the changes by reloading the httpd service.
+
+**Commands** 
+
+```
+sudo rm -rf /var/www/html/*
+sudo cp -r ~/MarketPeak_Ecommerce/* /var/www/html/
+sudo systemctl reload httpd
+```
+![](img/2.4rm-rf.png)
+![](img/2.4systemc.png)
 
 
+**Task 2.4 Access Website from browser**
 
+Access website from browser with httpd configured and website files in place, MarketPeak Ecommerce platform is now live on the internet: Open a web browser and access the public IP (http://13.61.13.134/2129_crispy_kitchen/) of your EC2 instance to view the deployed website.
+
+![](img/2.4webaccess.png)
+
+## Step 3: Continous Integration and Deployment Workflow
+
+To ensure a smooth workflow for developing, testing and deploying my e-commerce platform, follow this structured approach. it covers making changes in a development environment, utilizing version control with Git, and deploying updates to your production to server on AWS.
+
+## **Task 3.1: Developing New Features and Fixes**
+
+**.** Create a development Branch: Begin your development work by creating a separate branch. This isolates new features and bug fixes from the stable version of your website.
+
+**Commands**
+
+```
+git branch development
+git checkout development
+```
+  **.** Implement Changes: On the development branch, add your new features or bug fixes. This might include updating web pages. In my case, I just changes the slide image.
+
+## Task 3.2: Version control with Git
+
+  **.** Stage your changes: Once you have made the changes, stage the files you modified. You an add them individually, or if you have only changed the slide image, you can stage everything with.
+
+  **.** Commit your changes: After staging,commit your changes with a clear message describing the update.
+
+  **.** Push changes to remote development branch: push your changes to the remote development branch to keep everything update.
+
+**Commands**
+
+```
+git add .
+git commit -m "Add new features or fix bugs"
+git push origin development
+```
 
